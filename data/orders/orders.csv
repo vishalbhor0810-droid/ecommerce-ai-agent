@@ -1,0 +1,51 @@
+order_id,customer_name,product_name,product_type,amount,status,order_date,contact
+ORD1001,Priya Nair,Smart Watch,Electronics,4911,Returned,2026-08-18,priya.nair@example.com
+ORD1002,Arjun Mehta,Running Shoes,Footwear,3270,Returned,2026-08-07,arjun.mehta@example.com
+ORD1003,Priya Nair,Water Bottle,Sports,878,Processing,2026-09-07,priya.nair@example.com
+ORD1004,Ishaan Kapoor,Wireless Headphones,Electronics,2414,Processing,2026-08-14,ishaan.kapoor@example.com
+ORD1005,Arjun Mehta,Air Fryer,Home Appliances,6207,Processing,2026-09-05,arjun.mehta@example.com
+ORD1006,Arjun Mehta,Water Bottle,Sports,931,Returned,2026-09-04,arjun.mehta@example.com
+ORD1007,Ishaan Kapoor,Running Shoes,Footwear,3428,Cancelled,2026-08-18,ishaan.kapoor@example.com
+ORD1008,Aarav Sharma,Laptop Backpack,Accessories,2156,Delivered,2026-08-22,aarav.sharma@example.com
+ORD1009,Rohan Gupta,Laptop Backpack,Accessories,1909,Refunded,2026-08-22,rohan.gupta@example.com
+ORD1010,Vivaan Patel,Smart Watch,Electronics,5093,Processing,2026-08-23,vivaan.patel@example.com
+ORD1011,Kabir Verma,Desk Lamp,Home & Office,1334,Refunded,2026-08-03,kabir.verma@example.com
+ORD1012,Sneha Iyer,Coffee Maker,Home Appliances,3673,Processing,2026-08-25,sneha.iyer@example.com
+ORD1013,Vivaan Patel,Air Fryer,Home Appliances,6049,Refunded,2026-08-24,vivaan.patel@example.com
+ORD1014,Diya Shah,Running Shoes,Footwear,3559,Processing,2026-08-03,diya.shah@example.com
+ORD1015,Priya Nair,Running Shoes,Footwear,3594,Out for Delivery,2026-08-06,priya.nair@example.com
+ORD1016,Arjun Mehta,Smart Watch,Electronics,5093,Out for Delivery,2026-08-30,arjun.mehta@example.com
+ORD1017,Priya Nair,Denim Jeans,Clothing,1982,Out for Delivery,2026-08-23,priya.nair@example.com
+ORD1018,Arjun Mehta,Yoga Mat,Sports,1035,Returned,2026-08-05,arjun.mehta@example.com
+ORD1019,Diya Shah,Yoga Mat,Sports,986,Cancelled,2026-08-16,diya.shah@example.com
+ORD1020,Aditya Singh,Coffee Maker,Home Appliances,3593,Out for Delivery,2026-09-05,aditya.singh@example.com
+ORD1021,Arjun Mehta,Yoga Mat,Sports,1065,Refunded,2026-08-04,arjun.mehta@example.com
+ORD1022,Arjun Mehta,Wireless Headphones,Electronics,2560,Delivered,2026-08-18,arjun.mehta@example.com
+ORD1023,Vivaan Patel,Running Shoes,Footwear,3489,Returned,2026-08-21,vivaan.patel@example.com
+ORD1024,Arjun Mehta,Yoga Mat,Sports,1154,Delivered,2026-08-30,arjun.mehta@example.com
+ORD1025,Aditya Singh,Cotton T-Shirt,Clothing,870,Shipped,2026-09-05,aditya.singh@example.com
+ORD1026,Ananya Rao,Cotton T-Shirt,Clothing,1181,Cancelled,2026-08-28,ananya.rao@example.com
+ORD1027,Diya Shah,Bluetooth Speaker,Electronics,2884,Shipped,2026-08-09,diya.shah@example.com
+ORD1028,Ananya Rao,Coffee Maker,Home Appliances,3445,Refunded,2026-08-04,ananya.rao@example.com
+ORD1029,Vivaan Patel,Laptop Backpack,Accessories,2120,Shipped,2026-08-28,vivaan.patel@example.com
+ORD1030,Diya Shah,Smart Watch,Electronics,5096,Delivered,2026-09-08,diya.shah@example.com
+ORD1031,Rahul Joshi,Air Fryer,Home Appliances,6027,Cancelled,2026-08-01,rahul.joshi@example.com
+ORD1032,Priya Nair,Water Bottle,Sports,657,Returned,2026-09-04,priya.nair@example.com
+ORD1033,Rohan Gupta,Yoga Mat,Sports,1073,Processing,2026-08-19,rohan.gupta@example.com
+ORD1034,Ishaan Kapoor,Laptop Backpack,Accessories,2031,Processing,2026-08-17,ishaan.kapoor@example.com
+ORD1035,Ananya Rao,Laptop Backpack,Accessories,2058,Processing,2026-08-20,ananya.rao@example.com
+ORD1036,Priya Nair,Air Fryer,Home Appliances,6210,Shipped,2026-08-10,priya.nair@example.com
+ORD1037,Kabir Verma,Laptop Backpack,Accessories,2075,Refunded,2026-09-03,kabir.verma@example.com
+ORD1038,Aarav Sharma,Desk Lamp,Home & Office,1364,Delivered,2026-08-02,aarav.sharma@example.com
+ORD1039,Vivaan Patel,Denim Jeans,Clothing,2056,Shipped,2026-08-04,vivaan.patel@example.com
+ORD1040,Arjun Mehta,Desk Lamp,Home & Office,1239,Processing,2026-09-01,arjun.mehta@example.com
+ORD1041,Vivaan Patel,Air Fryer,Home Appliances,6291,Shipped,2026-08-09,vivaan.patel@example.com
+ORD1042,Priya Nair,Coffee Maker,Home Appliances,3680,Shipped,2026-08-17,priya.nair@example.com
+ORD1043,Ananya Rao,Desk Lamp,Home & Office,1415,Shipped,2026-09-04,ananya.rao@example.com
+ORD1044,Sneha Iyer,Water Bottle,Sports,701,Returned,2026-08-20,sneha.iyer@example.com
+ORD1045,Ishaan Kapoor,Yoga Mat,Sports,1231,Out for Delivery,2026-08-29,ishaan.kapoor@example.com
+ORD1046,Ananya Rao,Coffee Maker,Home Appliances,3460,Shipped,2026-08-15,ananya.rao@example.com
+ORD1047,Vivaan Patel,Denim Jeans,Clothing,1909,Cancelled,2026-09-05,vivaan.patel@example.com
+ORD1048,Arjun Mehta,Desk Lamp,Home & Office,1311,Processing,2026-08-05,arjun.mehta@example.com
+ORD1049,Sneha Iyer,Yoga Mat,Sports,929,Shipped,2026-08-05,sneha.iyer@example.com
+ORD1050,Aarav Sharma,Denim Jeans,Clothing,1935,Cancelled,2026-08-16,aarav.sharma@example.com

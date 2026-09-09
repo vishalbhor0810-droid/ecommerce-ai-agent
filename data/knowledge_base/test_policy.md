@@ -1,0 +1,1 @@
+ShopEase provides customer support for orders and payments.

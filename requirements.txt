@@ -1,0 +1,14 @@
+groq
+python-dotenv
+pydantic
+fastapi
+uvicorn
+langgraph
+langchain
+langchain-groq
+sentence-transformers
+numpy
+pandas
+scikit-learn
+chromadb
+tenacity

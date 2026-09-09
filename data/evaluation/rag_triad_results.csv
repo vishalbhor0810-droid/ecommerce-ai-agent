@@ -1,0 +1,16 @@
+query,context_relevance,groundedness,answer_relevance
+What is the return policy?,0.6093,1.0,1.0
+How long does a refund take?,0.6269,1.0,1.0
+How can I track my order?,0.6389,1.0,1.0
+Can I cancel my order?,0.7001,1.0,1.0
+What payment methods are supported?,0.485,1.0,1.0
+What should I do if my payment fails?,0.5718,1.0,1.0
+Can I pay using cash on delivery?,0.4898,1.0,1.0
+Can I exchange a product?,0.4777,1.0,1.0
+Does ShopEase provide warranty coverage?,0.7067,1.0,1.0
+What should I do if I receive a damaged product?,0.5687,1.0,1.0
+What happens if my delivery is delayed?,0.5839,1.0,1.0
+How does ShopEase protect customer privacy?,0.7082,1.0,1.0
+How can I contact customer support?,0.6047,1.0,1.0
+My order is late and I want to know what I can do,0.4769,1.0,1.0
+Can I return a damaged product?,0.6143,1.0,1.0
