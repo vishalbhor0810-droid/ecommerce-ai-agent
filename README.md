@@ -87,7 +87,6 @@ POST /ask
 
 ### Prompt injection blocked
 
-![Prompt injection blocked]
 <img width="778" height="259" alt="image" src="https://github.com/user-attachments/assets/bd58e170-5e47-4da0-868b-12fc854e0920" />
 
 
