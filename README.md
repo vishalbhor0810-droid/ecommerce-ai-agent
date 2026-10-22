@@ -29,36 +29,26 @@ The system uses **RAG, LangGraph, Groq LLM, MCP, persistent memory, guardrails, 
 
 Section 2: Architecture
 
-## System Architecture
+flowchart TD
+    U["User"] --> API["FastAPI API"]
+    API --> IG["Input Guardrails<br/>PII masking · Prompt-injection check"]
+    IG --> A["LangGraph Agent"]
 
-                    User
-                     |
-                     v
-                FastAPI API
-                     |
-                     v
-              LangGraph Agent
-                     |
-          +----------+----------+
-          |          |          |
-          v          v          v
-        RAG      Order Tool   Fallback
-          |          |
-          v          v
-    ChromaDB       MCP
-          |          |
-          v          v
+    A -->|Policy / FAQ query| R["RAG Retriever"]
+    A -->|Order status query| OT["Order Tool"]
+    A -->|Out of scope| FB["Fallback"]
 
-ShopEase KB Order Data
-|
-v
-Groq LLM
-|
-v
-Guardrails + Validation
-|
-v
-Final Response
+    R --> KB[("ChromaDB<br/>ShopEase KB")]
+    OT --> M["MCP Server"]
+    M --> OD[("Order Data")]
+
+    KB --> LLM["Groq LLM"]
+    OD --> LLM
+    LLM --> OG["Output Guardrails + Validation<br/>Groundedness check · Pydantic"]
+    OG --> OUT["Final Response"]
+    FB --> OUT
+
+    A -.-> CP[("SQLite Checkpointer")]
 
 ## Technology Stack
 
