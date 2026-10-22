@@ -29,6 +29,10 @@ The system uses **RAG, LangGraph, Groq LLM, MCP, persistent memory, guardrails, 
 
 Section 2: Architecture
 
+
+## System Architecture
+
+```mermaid
 flowchart TD
     U["User"] --> API["FastAPI API"]
     API --> IG["Input Guardrails<br/>PII masking · Prompt-injection check"]
@@ -49,6 +53,7 @@ flowchart TD
     FB --> OUT
 
     A -.-> CP[("SQLite Checkpointer")]
+```
 
 ## Technology Stack
 
