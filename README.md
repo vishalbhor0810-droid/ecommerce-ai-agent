@@ -55,6 +55,42 @@ flowchart TD
     A -.-> CP[("SQLite Checkpointer")]
 ```
 
+
+
+## Demo
+
+### Knowledge-base query (RAG)
+
+**Request**
+```json
+POST /ask
+{ "query": "What is the return policy?", "session_id": "demo" }
+```
+
+**Response** (trimmed)
+```json
+{
+  "trace_id": "588b9c76-4814-47c2-9e7a-9904005841ae",
+  "query": "What is the return policy?",
+  "injection_detected": false,
+  "intent": "rag",
+  "retrieved_context": [
+    {
+      "source": "returns.md",
+      "similarity": 0.61,
+      "text": "A return request submitted after the 7-day return period may be rejected unless..."
+    }
+  ],
+  "answer": "A return request submitted after the 7-day return period may be rejected unless an exception is approved by customer support. Items received in a damaged or incorrect condition should be reported as soon as possible. The return process may require photographs or other information to verify the condition of the product"
+}
+```
+
+### Prompt injection blocked
+
+![Prompt injection blocked]
+<img width="856" height="266" alt="image" src="https://github.com/user-attachments/assets/1de3a8f5-8fce-4229-9ede-436b993b458f" />
+
+
 ## Technology Stack
 
 | Component            | Technology            |
