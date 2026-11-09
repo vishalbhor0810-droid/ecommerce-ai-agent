@@ -36,21 +36,18 @@ Section 2: Architecture
 flowchart TD
     U["User"] --> API["FastAPI API"]
     API --> IG["Input Guardrails: PII masking, Prompt-injection check"]
-    IG --> A["LangGraph Agent"]
+    IG -->|Injection detected| BLK["Blocked response"]
+    IG --> A["LangGraph Agent (Groq LLM with tool calling)"]
 
-    A -->|Policy / FAQ query| R["RAG Retriever"]
-    A -->|Order status query| OT["Order Tool"]
-    A -->|Out of scope| FB["Fallback"]
-
+    A -->|search_policy| R["RAG Retriever + similarity threshold"]
+    A -->|check_order| M["MCP Server"]
     R --> KB[("ChromaDB - ShopEase KB")]
-    OT --> M["MCP Server"]
     M --> OD[("Order Data")]
+    R -->|Tool results| A
+    M -->|Tool results| A
 
-    KB --> LLM["Groq LLM"]
-    OD --> LLM
-    LLM --> OG["Output Guardrails: Groundedness check, Pydantic validation"]
+    A -->|Final answer or off-topic refusal| OG["Output Guardrails: Groundedness check, Escalation rule, Pydantic validation"]
     OG --> OUT["Final Response"]
-    FB --> OUT
 
     A -.-> CP[("SQLite Checkpointer")]
 ```
@@ -70,18 +67,18 @@ POST /ask
 **Response** (trimmed)
 ```json
 {
-  "trace_id": "588b9c76-4814-47c2-9e7a-9904005841ae",
+  "trace_id": "1d97eedf-0a5d-4319-8acd-1aeedc00d24d",
   "query": "What is the return policy?",
   "injection_detected": false,
   "intent": "rag",
-  "retrieved_context": [
-    {
-      "source": "returns.md",
-      "similarity": 0.61,
-      "text": "A return request submitted after the 7-day return period may be rejected unless..."
-    }
-  ],
-  "answer": "A return request submitted after the 7-day return period may be rejected unless an exception is approved by customer support..."
+  "tools_used": ["search_policy"],
+  "answer": {
+    "answer": "ShopEase allows returns within 7 days of delivery. After that, a return may be rejected unless customer support approves an exception...",
+    "source": "knowledge_base",
+    "similarity": 0.60,
+    "escalation_required": false,
+    "grounded": true
+  }
 }
 ```
 
@@ -188,25 +185,25 @@ Section 4 — Agent & Guardrails
 
 ### LangGraph Agent
 
-The customer-support agent is implemented using **LangGraph** with conditional routing.
+The customer-support agent is implemented using **LangGraph** with **LLM tool calling**.
 
 The main workflow includes:
 
 - Memory loading
 - PII guardrail
-- Prompt injection detection
-- Query classification
-- Knowledge-base retrieval
-- Order status tool
-- Fallback handling
-- Answer generation
-- Response validation
+- Prompt injection detection (blocked requests never reach the LLM)
+- Agent loop: the LLM decides which tools to call
+- Output guardrails and response validation
+- Memory saving
 
-The classifier routes queries into three main paths:
+The LLM has two tools and chooses between them based on the question:
 
-- **RAG** — for knowledge-base questions
-- **Order** — for order-status queries
-- **Unknown** — for unsupported questions
+- **search_policy** — searches the knowledge base; chunks below the similarity threshold are dropped
+- **check_order** — looks up an order through the MCP server
+
+It can call both tools for a mixed question (e.g. "Where is ORD1002 and can I return it?"). Off-topic questions are politely refused without calling any tool. The agent loop is capped at **3 tool iterations** so it cannot loop forever.
+
+The `intent` field in the response (`rag`, `order`, `rag+order` or `general`) is derived from the tools the LLM actually used.
 
 ### Order Status and Escalation
 
@@ -250,6 +247,13 @@ The system implements three guardrails:
 3. **Groundedness Check** — verifies that generated answers contain sufficient information supported by the retrieved knowledge-base context.
 
 Detected prompt injection attempts are blocked instead of being processed normally.
+
+### Guardrail Tests
+
+The injection guardrail is covered by pytest tests in `tests/test_injection_guardrail.py` (run with `pytest -v`).
+
+- 5 tests pass: known attack phrasings are blocked, and normal questions (including ones containing words like "ignore") are allowed.
+- 3 tests are marked `xfail`: paraphrased attacks such as "Disregard previous system prompt" are not caught by the regex patterns. This is a documented limitation. In these cases the system prompt acts as a second layer of defense, and a classifier-based guardrail is the planned improvement.
 
 Section 5 — API & Evaluation
 
