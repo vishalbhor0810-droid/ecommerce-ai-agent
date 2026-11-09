@@ -2,6 +2,10 @@ from pathlib import Path
 
 import chromadb
 
+from app.rag.chunking import (
+    fixed_size_chunking,
+    sentence_based_chunking
+)
 from app.rag.embeddings import create_embeddings
 
 
@@ -49,3 +53,47 @@ class RAGRetriever:
             })
 
         return retrieved
+
+    def add_document(self, source, text):
+        """
+        Chunk, embed and store a new document in both collections.
+        Uses the same chunk IDs as scripts/build_vector_store.py.
+        Returns the number of sentence chunks added.
+        """
+
+        strategies = [
+            ("fixed", self.fixed_collection, fixed_size_chunking),
+            ("sentence", self.sentence_collection, sentence_based_chunking),
+        ]
+
+        sentence_chunk_count = 0
+
+        for strategy, collection, chunker in strategies:
+
+            # Remove old chunks first in case this document is being updated
+            collection.delete(where={"source": source})
+
+            text_chunks = chunker(text)
+
+            if not text_chunks:
+                continue
+
+            embeddings = create_embeddings(text_chunks)
+
+            collection.upsert(
+                ids=[
+                    f"{strategy}_{source}_{index}"
+                    for index in range(len(text_chunks))
+                ],
+                documents=text_chunks,
+                embeddings=embeddings.tolist(),
+                metadatas=[
+                    {"source": source}
+                    for _ in text_chunks
+                ]
+            )
+
+            if strategy == "sentence":
+                sentence_chunk_count = len(text_chunks)
+
+        return sentence_chunk_count

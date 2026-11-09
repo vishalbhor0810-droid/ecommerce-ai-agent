@@ -22,7 +22,7 @@ def main():
         print(f"QUESTION: {query}")
         print("=" * 70)
 
-        result = rag.answer(query)
+        result = rag.answer_query(query)
 
         print(f"Similarity: {result['similarity']:.4f}")
         print(f"Source: {result['source']}")

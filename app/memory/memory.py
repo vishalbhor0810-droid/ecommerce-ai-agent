@@ -1,4 +1,5 @@
 import json
+import re
 from pathlib import Path
 from datetime import datetime
 
@@ -10,7 +11,9 @@ class ConversationMemory:
 
     def __init__(self, session_id="default"):
 
-        self.session_id = session_id
+        # session_id comes from the API, so keep only safe filename characters
+        # to stop values like "../../x" from writing outside MEMORY_DIR
+        self.session_id = re.sub(r"[^A-Za-z0-9_-]", "_", session_id) or "default"
 
         MEMORY_DIR.mkdir(
             parents=True,
@@ -19,7 +22,7 @@ class ConversationMemory:
 
         self.file_path = (
             MEMORY_DIR /
-            f"{session_id}.json"
+            f"{self.session_id}.json"
         )
 
         self.messages = []
